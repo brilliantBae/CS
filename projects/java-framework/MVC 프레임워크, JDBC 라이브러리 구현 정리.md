@@ -34,7 +34,7 @@ MVC 패턴은 사용자 요청을 처음으로 받는 컨트롤러, 컨트롤러
 
   * 스프링에서는 `DispatcherServlet` 이 서블릿 역할을 하고 있고, 이것이 서블릿 컨테이너와 스프링 프레임워크를 연결해주는 부분이 된다는 것이 내 생각이다.
 
-*  `DispatcherServlet` 은 모든 사용자 요청을 맨 앞에서 처음으로 받게 되는데 이것을 Front Controller 구조라고 한다.  `DispatcherServlet`  내에서는 handler mapping 전략을 이용해 url 과 컨트롤러를 매핑시켜 각각의 컨트롤러들에게 요청을 위임한다. (이 작업은 한번만 실행되는 서블릿 초기화 메소드 `init()` 메소드 내에서 이루어지는 작업이다.)
+* `DispatcherServlet` 은 모든 사용자 요청을 맨 앞에서 처음으로 받게 되는데 이것을 Front Controller 구조라고 한다.  `DispatcherServlet`  내에서는 handler mapping 전략을 이용해 url 과 컨트롤러를 매핑시켜 각각의 컨트롤러들에게 요청을 위임한다. (이 작업은 한번만 실행되는 서블릿 초기화 메소드 `init()` 메소드 내에서 이루어지는 작업이다.)
 
 * 서블릿으로부터 요청을 위임받은 컨트롤러는 모델 객체를 생성하고 넘겨받은 요청에서 데이터를 추출해 모델에 저장한다. (데이터에 대한 로직 처리는 service 계층 클래스에 위임한다.)
 
@@ -42,9 +42,25 @@ MVC 패턴은 사용자 요청을 처음으로 받는 컨트롤러, 컨트롤러
 
 * 뷰의 정보와 모델 객체를 넘겨받은  `DispatcherServlet` 은 실질적으로 뷰 객체를 생성하는데 이때 내부적으로 `ViewResolver` 라는 것을 내부적으로 이용해 뷰의 정보를 이용해 실질적인 뷰 객체를 찾아준다. 생성한 뷰 객체에 모델 객체를 전달하여 처리하도록 하고 최종결과물을 받아 그것을 `HttpServletResponse` 객체에 담아 다시 클라이언트에게 응답으로 보내준다.
 
-  
 
 
+
+## JDBC 라이브러리 구현
+
+Spring 의 JdbcTemplate는 JPA 와 존재하는 목적이 비슷하다. 
+
+JDBC api를 그냥 사용하게 되면, 자바 애플리케이션이 지향하는 객체지향 패러다임과 데이터베이스가 지향하는 데이터 중심 패러다임 사이에 존재하는 차이를 극복하기 위해 많은 양의 보일러플레이트 코드들이 생겨나기 때문에 이를 줄이고자 등장한 것이다.
+
+둘의 차이가 있다면 JdbcTemplate은 sql 문을 개발자가 직접 작성해야 하므로 sql 에 의존하는 개발을 피할 수 없다는 점이다. 
+
+JdbcTemplate은 SQL 매퍼라고 부르고 내부적으로 JDBC api를 사용하며 이름 그대로 객체와 SQL을 매핑한다. 
+
+스프링에서는 JdbcTemplate과 비슷한 역할을 하는 애들을 여럿 제공하고 있다.
+
+- JdbcTemplate
+- NamedParameterJdbcTemplate
+- SimpleJdbcTemplate
+- SimpleJdbcInsert and SimpleJdbcCall
 
 
 
