@@ -62,5 +62,5 @@ JdbcTemplate은 SQL 매퍼라고 부르고 내부적으로 JDBC api를 사용하
 - SimpleJdbcTemplate
 - SimpleJdbcInsert and SimpleJdbcCall
 
-
+By using the JdbcTemplate class, you don't need to create connection,statement,start transaction,commit transaction and close connection to execute different queries. You can execute the query directly.
 
